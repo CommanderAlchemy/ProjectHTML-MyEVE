@@ -11,6 +11,7 @@ h1 h2 {
 #wrapper {
 	margin:auto;
 	height:100%;
+    background-color:black
 }
 
 #loading {
@@ -43,15 +44,25 @@ header {
 nav h1 {
 	font-size:22px;
 	font-weight:700;
-	color:#000;
+	color:white;
 	margin:20px;
+    text-align:center;
+    border-bottom:1px solid white;
+}
+
+nav h6 {
+	font-size:22px;
+	font-weight:700;
+	color: white;
+	margin:0px;
+    text-align:center;
 }
 
 nav {
 	width:25%;
 	min-height:400px;
 	height:100%;
-	background-color:#fff;
+    background-color:rgba(0,0,0,.7);
 	box-shadow:5px 1px 5px #888;
 	float:left;
 	position:fixed;
