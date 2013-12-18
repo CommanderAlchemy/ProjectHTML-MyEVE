@@ -1,0 +1,121 @@
+article h2 {
+	font:400 40px/1.5 Helvetica, Verdana, sans-serif;
+	margin:0;
+	padding:0;
+}
+
+article ul {
+	width:100%;
+	height:100%;
+	overflow-x:hidden;
+	display:block;
+	list-style-type:none;
+	margin-right:20px;
+	padding:0;
+}
+
+article li {
+	cursor:hand;
+	-moz-box-shadow:inset 0px 1px 0px 0px #f0f0f0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f0f0f0;
+	box-shadow:inset 0px 1px 0px 0px #f0f0f0;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d6d6d6) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #d6d6d6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d6d6d6');
+	background-color:#ffffff;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #ffffff;
+	font-size:12px;
+	color:#000;
+	font-family:Arial;
+	box-shadow:5px 1px 5px #888;
+	height:40px;
+	padding-left:15px;
+	margin-right:2px;
+	margin-bottom:2px;
+}
+
+article li:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d6d6d6), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #d6d6d6 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d6d6d6', endColorstr='#ffffff');
+	background-color:#d6d6d6;
+}
+
+article li:last-child {
+	border:none;
+}
+
+article ul:first-child {
+	margin-top:5px;
+}
+
+article li > a {
+	text-decoration:none;
+	color:#000;
+	display:block;
+}
+
+article li > a:hover {
+	font-size:20px;
+}
+
+article p {
+	border-bottom:1px solid #000;
+}
+
+article li > div {
+	font-size:10px;
+	height:150px;
+	width:40%;
+	background-color:#fff;
+	margin:10px;
+}
+
+#content li {
+	min-height:40px;
+	height:auto;
+	overflow:hidden;
+	display:block;
+}
+
+#content span {
+	font-size:14px;
+	line-height:40px;
+	min-height:40px;
+	height:auto;
+	overflow:hidden;
+}
+
+#content span > img {
+	margin-top:5px;
+	margin-right:5px;
+	float:right;
+	z-index:10;
+}
+
+#description {
+	height:30px;
+	display:inline-block;
+}
+
+#characterDropdown{
+	width:70%;
+	float:left;
+}
+#saveForm{
+	width:15%;
+	float:left;
+}

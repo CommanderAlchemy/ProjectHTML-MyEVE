@@ -1,0 +1,18 @@
+<script src="js/combats.js"></script>
+<link type="text/css" rel="stylesheet" href="css/combats.css">
+<div id="loading">Laddar strider...</div>
+<div id="title">Senaste strider</div>
+<div id="description">Här kan du kolla dina karaktärers senaste strider.</div>
+<div id="content">
+	<form action="server.php" class="appnitro" enctype="multipart/form-data" method="post" id="characterForm">
+		<label class="description" for="typeDropdown">Hämta strid för karaktär:</label>
+		<div>
+			<select class="element select medium" id="characterDropdown" name="character"> 
+		
+			</select>
+		</div> 
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Hämta" />
+	</form>
+	<ul>
+	</ul>
+</div>

@@ -24,14 +24,9 @@ function loadUserData(){
 		
 		saveSettings(name, keyID, vCode);
 		
-		$(data).find('row').each(function(){
-			//var characterName = document.createTextNode(getNodeValue($(this).find("name"),'name'));
-			console.log($(this).attr('name'));
-			//var characterName = $(this).find("name").val();
-		});
 		stopLoad();
 	}).fail(function(){
-		alert("Misslyckades att hämta konto information.");
+		alert("Misslyckades att hämta konto-information.");
 	});	
 }
 
