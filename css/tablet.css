@@ -56,6 +56,7 @@ nav h6 {
 	color: white;
 	margin:0px;
     text-align:center;
+    margin:5px;
 }
 
 nav {
@@ -76,10 +77,10 @@ nav a {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f0f0f0;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f0f0f0;
 	box-shadow:inset 0px 1px 0px 0px #f0f0f0;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d6d6d6) );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e39100), color-stop(1, rgba(0,0,0,.3)) );
 	background:-moz-linear-gradient( center top, #ffffff 5%, #d6d6d6 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d6d6d6');
-	background-color:#ffffff;
+	background-color:#e39100;
 	-webkit-border-top-left-radius:0px;
 	-moz-border-radius-topleft:0px;
 	border-top-left-radius:0px;
@@ -93,9 +94,9 @@ nav a {
 	-moz-border-radius-bottomleft:0px;
 	border-bottom-left-radius:0px;
 	text-indent:0px;
-	border:1px solid #ffffff;
+	border:1px solid #000;
 	display:block;
-	color:#777;
+	color:#fff;
 	font-size:15px;
 	font-weight:700;
 	font-style:normal;
@@ -103,11 +104,23 @@ nav a {
 	line-height:50px;
 	text-decoration:none;
 	text-align:center;
-	text-shadow:1px 1px 0 #fff;
+	text-shadow:1px 1px 0 rgba(0,0,0,1);
+
+     -webkit-transition:
+        background .5s linear,
+        background-color .5s linear,
+        border-color 1s linear,
+        border-radius .1s linear;
+
+    transition:
+        background-gradient .5s linear,
+        background-color .5s linear,
+        border-color 1s linear,
+        border-radius .1s linear,
 }
 
 nav a:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d6d6d6), color-stop(1, #ffffff) );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, rgba(23,155,200,1)), color-stop(1, rgba(0,0,0,.6)) );
 	background:-moz-linear-gradient( center top, #d6d6d6 5%, #ffffff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d6d6d6', endColorstr='#ffffff');
 	background-color:#d6d6d6;
