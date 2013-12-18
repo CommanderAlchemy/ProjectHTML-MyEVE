@@ -1,0 +1,33 @@
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script src="js/viewMediaJS.js"></script>
+<link type="text/css" rel="stylesheet" href="css/viewMediaCSS.css">
+<div id="loading">Loading...</div>
+<div id="title"></div>
+<div id="description"></div>
+<div id="content">	
+		<form action="server.php" class="appnitro" enctype="multipart/form-data" method="post" id="viewMedia">
+			<div class="form_description">
+				<h2>Kolla media</h2>
+				<p>Välj media typ du vill se.</p>
+			</div>						
+			<ul>
+				<li id="li_3" >
+					<label class="description" for="typeDropdown">Fil typ </label>
+					<div>
+						<select class="element select medium" id="typeDropdown" name="type"> 
+							<option value="all">Alla</option>
+							<option value="photo">Foto</option>
+							<option value="video">Video</option>
+							<option value="audio">Ljud</option>
+						</select>
+					</div> 
+				</li>
+				<li class="buttons">
+					<input id="saveForm" class="button_text" type="submit" name="submit" value="Hämta" />
+				</li>
+			</ul>
+		</form>	
+		<ul id="resultList">
+		
+		</ul>
+</div>
