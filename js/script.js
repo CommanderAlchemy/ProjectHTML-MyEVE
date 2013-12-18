@@ -22,7 +22,6 @@ function stopLoad(){
 function start(){
 	checkWidth();
 	isLocalStorageSupported();
-	loadSettings();
 	initMenuListener();
 	checkSettings();
 	
@@ -107,12 +106,6 @@ function isLocalStorageSupported() {
 	} catch (e) {
 		alert("localstorage not supported");
 	}
-}
-
-//Loads user information from localstorage. 
-function loadSettings(){
-	$("#user").html(localStorage.getItem("name"));
-	$("#bestMovie").html(localStorage.getItem("bestmovie"));
 }
 
 //Toggles the menu. Up or down.
