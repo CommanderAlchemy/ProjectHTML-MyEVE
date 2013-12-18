@@ -16,6 +16,10 @@ function loadCharacters(){
 	
 	startLoad();
 	
+	var characters = localStorage.getItem("characters");
+	alert(JSON.stringify(characters));
+	
+	/*
 	$.ajax({
 		url: "server.php",
 		data: {key: keyID, code: vCode},
@@ -31,6 +35,7 @@ function loadCharacters(){
 	}).fail(function(){
 		alert("Misslyckades att hämta konto information.");
 	});	
+	*/
 }
 
 function loadCharacterFights(){

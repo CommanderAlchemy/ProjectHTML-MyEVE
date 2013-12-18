@@ -1,6 +1,8 @@
 <?php
 	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter"){
 		getAccountCharacter();
+	}else if(isset($_GET['type']) && $_GET['type'] == "combat"){
+		getBattleLog();
 	}
 
 	if(isset($_GET['character'])){
@@ -33,4 +35,10 @@
 			echo $data;
 		}
 	}
+	
+	/*
+	 *
+	 */
+	 function getBattleLog(){
+	 }
 ?> 

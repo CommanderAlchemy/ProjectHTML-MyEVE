@@ -60,9 +60,12 @@ function loadUserCharacters(){
 		//Saving characters.
 		$(data).find('row').each(function(){
 			var characterName 		= $(this).attr('name');
-			characters.push(characterName);
+			var characterID 		= $(this).attr('characterID');
+			
+			var characterObject= {"Name":characterName,"Id":characterID};
+			characters.push(characterObject);
 		});
-		localStorage.setItem('characters', JSON.stringify(characters));	
+		localStorage.setItem('characters', characters);	
 		alert(JSON.stringify(characters));
 		
 		stopLoad();
