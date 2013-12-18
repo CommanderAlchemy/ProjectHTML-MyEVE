@@ -1,7 +1,7 @@
 $(document).on("ready", start);
 
 //Variables.
-var mobileMode=false;
+var mobileMode =false;
 var mobileSize = 500;
 var menuOpen = false;
 var loading = false;
@@ -18,12 +18,24 @@ function stopLoad(){
 	loading = false;
 }
 
+//Shows loading information when ajax is used.
+function setAjaxLoadingListener(){
+	$(document).ajaxStart(function () {
+		startLoad();
+	});
+
+	$(document).ajaxComplete(function () {
+		stopLoad();
+	});
+}
+
 //Start function. Initiates the functions of the site.
 function start(){
 	checkWidth();
 	isLocalStorageSupported();
 	initMenuListener();
 	checkSettings();
+	setAjaxLoadingListener();
 	
 	//$(body).on(ajaxLoading);
 	
@@ -120,12 +132,9 @@ function toggleMenu(){
 //Loads a page (content) with ajax.
 function loadPage(page){
 	if(!loading){
-		startLoad();
-		
 		$.ajax({
 			url: page
 		}).done(function(data){
-			stopLoad();
 			$('article').html(data);
 			if(mobileMode==true && menuOpen)
 				toggleMenu();
