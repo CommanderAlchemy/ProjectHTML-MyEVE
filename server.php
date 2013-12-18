@@ -8,6 +8,5 @@
 		echo $data;
 	}
 	//balbalbalblalba
-	//hjkhkhki
 	
 ?> 
