@@ -1,9 +1,9 @@
-start();
+start();//lkjasdlkjsaldkj
 
-function start(){
+function start(){//lkasdlkjasd
 
 }
  
-function getCharacterInfo(){
+function getCharacterInfo(){//AIDS
 
 }
