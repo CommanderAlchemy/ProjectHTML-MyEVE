@@ -36,9 +36,41 @@ function checkSettings(){
 	if(localStorage.getItem("vCode") == null || localStorage.getItem("keyID") == null){
 		loadPage("ajax/settings.html");
 	}else{
+		loadUserCharacters();
 		loadPage("ajax/character.html");
 	}
 }
+
+//Loading characters from current account.
+function loadUserCharacters(){
+	var keyID	 	= localStorage.getItem("keyID");
+	var vCode	 	= localStorage.getItem("vCode")
+	
+	startLoad();
+	
+	$.ajax({
+		url: "server.php",
+		data: {type: "getAccountCharacter", key: keyID, code: vCode},
+		dataType: "xml",
+		async:false
+	}).done(function(data){	
+		var characters = [];
+		localStorage.setItem("characters", "");
+		
+		//Saving characters.
+		$(data).find('row').each(function(){
+			var characterName 		= $(this).attr('name');
+			characters.push(characterName);
+		});
+		localStorage.setItem('characters', JSON.stringify(characters));	
+		alert(JSON.stringify(characters));
+		
+		stopLoad();
+	}).fail(function(){
+		alert("Misslyckades att hämta konto-information.");
+	});	
+}
+
 
 //Initiates the menu listener.
 function initMenuListener(){

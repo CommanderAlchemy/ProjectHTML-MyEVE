@@ -18,11 +18,12 @@ function loadUserData(){
 	
 	$.ajax({
 		url: "server.php",
-		data: {key: keyID, code: vCode},
+		data: {type: "getAccountCharacter", key: keyID, code: vCode},
 		dataType: "xml"
 	}).done(function(data){
 		
 		saveSettings(name, keyID, vCode);
+		alert("Success! MyEve is now connected.");
 		
 		stopLoad();
 	}).fail(function(){

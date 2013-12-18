@@ -14,7 +14,7 @@ function loadCharacters(){
 	
 	$.ajax({
 		url: "server.php",
-		data: {key: keyID, code: vCode},
+		data: {type: "getAccountCharacter", key: keyID, code: vCode},
 		dataType: "xml"
 	}).done(function(data){
 		$(data).find('row').each(function(){
