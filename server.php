@@ -7,6 +7,5 @@
 		fclose($fp);
 		echo $data;
 	}
-	//balbalbalblalba
 	
 ?> 
