@@ -1,5 +1,4 @@
 $(document).on("ready", start);
-
 //Variables.
 var mobileMode =false;
 var mobileSize = 500;
@@ -8,25 +7,35 @@ var loading = false;
 
 //Shows loading message.
 function startLoad(){
-	$('#loading').fadeIn(150);
+	$('#loading').fadeIn(300);
 	loading = true;
+    console.log("START: Loading...");
 }
 
 //Hides loading message.
 function stopLoad(){
-	$("#loading").fadeOut(150);
+	$("#loading").fadeOut(300);
 	loading = false;
+    console.log("STOP: Loading...");
+/*     $('#loading').css("visibility", "hidden");*/
 }
 
 //Shows loading information when ajax is used.
 function setAjaxLoadingListener(){
 	$(document).ajaxStart(function () {
 		startLoad();
+        console.log("Ajax: START");
 	});
 
 	$(document).ajaxComplete(function () {
 		stopLoad();
+        console.log("Ajax: Complete");
 	});
+
+    $(document).ajaxError(function () {
+        stopLoad();
+        console.log("Ajax: Error");
+    });
 }
 
 //Start function. Initiates the functions of the site.
@@ -56,9 +65,7 @@ function checkSettings(){
 function loadUserCharacters(){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode")
-	
-	startLoad();
-	
+
 	$.ajax({
 		url: "server.php",
 		data: {type: "getAccountCharacter", key: keyID, code: vCode},
@@ -78,8 +85,7 @@ function loadUserCharacters(){
 		});
 		localStorage.setItem('characters', characters);	
 		alert(JSON.stringify(characters));
-		
-		stopLoad();
+
 	}).fail(function(){
 		alert("Misslyckades att hämta konto-information.");
 	});	
@@ -138,7 +144,6 @@ function loadPage(page){
 			$('article').html(data);
 			if(mobileMode==true && menuOpen)
 				toggleMenu();
-			
 		}).fail(function(){
 			alert("Det blev något fel");
 		});

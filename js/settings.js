@@ -2,9 +2,7 @@ start();
 
 function start(){
 	loadSettings();
-	stopLoad();
-	
-	$("#settings").on("submit", function(e){		
+	$("#settings").on("submit", function(e){
 		e.preventDefault();
 		loadUserData();
 	});
@@ -21,11 +19,8 @@ function loadUserData(){
 		data: {type: "getAccountCharacter", key: keyID, code: vCode},
 		dataType: "xml"
 	}).done(function(data){
-		
 		saveSettings(name, keyID, vCode);
 		alert("Success! MyEve is now connected.");
-		
-		stopLoad();
 	}).fail(function(){
 		alert("Misslyckades att hämta konto-information.");
 	});	

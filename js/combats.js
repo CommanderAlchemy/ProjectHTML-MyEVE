@@ -1,7 +1,6 @@
 start();
 
 function start(){
-	stopLoad();
 	loadCharacters();
 	
 	$('#characterForm').on("submit", function(e){		
@@ -13,9 +12,7 @@ function start(){
 function loadCharacters(){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
-	
-	startLoad();
-	
+
 	var characters = localStorage.getItem("characters");
 	alert(JSON.stringify(characters));
 	
@@ -42,8 +39,7 @@ function loadCharacterFights(){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
 	var characterID	= $("#characterDropdown").val();
-	
-	startLoad();
+
 	$.ajax({
 		url: "server.php",
 		data: {type: "combat", key: keyID, code: vCode, character: characterID},
@@ -52,7 +48,6 @@ function loadCharacterFights(){
 		$(data).find('row').each(function(){
 			alert($(this));
 		});
-		stopLoad();
 	}).fail(function(){
 		alert("Misslyckades att hämta konto information.");
 	});	

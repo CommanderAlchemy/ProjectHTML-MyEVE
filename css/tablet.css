@@ -28,6 +28,7 @@ h1 h2 {
 	font-weight:700;
 	font-style:normal;
 	vertical-align:middle;
+
 }
 
 header {
@@ -107,14 +108,15 @@ nav a {
 	text-shadow:1px 1px 0 rgba(0,0,0,1);
 
      -webkit-transition:
-        background .5s linear,
-        background-color .5s linear,
+        background 1s linear,
+        background-color 1s linear,
         border-color 1s linear,
         border-radius .1s linear;
 
     transition:
-        background-gradient .5s linear,
-        background-color .5s linear,
+        background 1s linear
+        background-gradient 1s linear,
+        background-color 1s linear,
         border-color 1s linear,
         border-radius .1s linear,
 }
