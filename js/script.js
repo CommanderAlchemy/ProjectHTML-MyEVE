@@ -7,17 +7,16 @@ var loading = false;
 
 //Shows loading message.
 function startLoad(){
-	$('#loading').fadeIn(300);
+	$('#loading').fadeIn(100);
 	loading = true;
     console.log("START: Loading...");
 }
 
 //Hides loading message.
 function stopLoad(){
-	$("#loading").fadeOut(300);
+	$("#loading").fadeOut(100);
 	loading = false;
     console.log("STOP: Loading...");
-/*     $('#loading').css("visibility", "hidden");*/
 }
 
 //Shows loading information when ajax is used.
@@ -32,9 +31,13 @@ function setAjaxLoadingListener(){
         console.log("Ajax: Complete");
 	});
 
-    $(document).ajaxError(function () {
+    $(document).ajaxError(function (e, xhr, options, error) {
         stopLoad();
-        console.log("Ajax: Error");
+        console.log("\n\nAjax: Error BEGIN \n>>>>>>>>>>>>>>>>>\n\n" + error + "\n");
+        console.log(e);
+        console.log(xhr);
+        console.log(options);
+        console.log("\n\n<<<<<<<<<<<<<<< \nAjax: Error END\n\n");
     });
 }
 
