@@ -7,20 +7,22 @@ var loading = false;
 
 //Shows loading message.
 function startLoad(){
-	$('#loading').fadeIn(100);
+	$('#loading').show();
 	loading = true;
     console.log("START: Loading...");
 }
 
 //Hides loading message.
 function stopLoad(){
-	$("#loading").fadeOut(100);
+	$("#loading").hide();
 	loading = false;
     console.log("STOP: Loading...");
 }
 
 //Shows loading information when ajax is used.
 function setAjaxLoadingListener(){
+	$('#loading').hide();
+
 	$(document).ajaxStart(function () {
 		startLoad();
         console.log("Ajax: START");
