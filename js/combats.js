@@ -50,7 +50,7 @@ function loadCharacterFights(){
 
 	$.ajax({
 		url: "server.php",
-		data: {type: "combat", key: keyID, code: vCode, character: characterID},
+		data: {type: "combat", key: keyID, code: vCode, char: characterID},
 		dataType: "xml"
 	}).done(function(data){
 		$(data).find('row').each(function(){
