@@ -6,6 +6,13 @@ function start(){
 		e.preventDefault();
 		loadUserData();
 	});
+
+    $("#clearButton").on("click", function(e){
+        alert("Rensat inställningar");
+        localStorage.clear();
+        clearForm();
+
+    });
 }
 
 //Saves the input data from the user if it's not empty.
@@ -44,4 +51,8 @@ function loadSettings(){
 	if(localStorage.getItem("name") !== null){
 		$("#name").val(localStorage.getItem("name"));
 	}
+}
+
+function clearForm() {
+    $("#settings").reset();
 }
