@@ -54,5 +54,5 @@ function loadSettings(){
 }
 
 function clearForm() {
-    $("#settings").reset();
+    $("#settings").trigger("reset");
 }
