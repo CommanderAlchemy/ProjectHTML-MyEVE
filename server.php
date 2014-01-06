@@ -5,7 +5,7 @@
 	}else if(isset($_GET['type']) && $_GET['type'] == "combat"){
 		getBattleLog();
 
-	}else if(isset($_GET['type']) && $_GET['type'] == "accStatus"){
+	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus"){
 		getAccountStatus();
 
 	}
