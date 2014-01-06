@@ -69,7 +69,7 @@ function checkSettings(){
 //Loading characters from current account.
 function loadUserCharacters(){
 	var keyID	 	= localStorage.getItem("keyID");
-	var vCode	 	= localStorage.getItem("vCode")
+	var vCode	 	= localStorage.getItem("vCode");
 
 	$.ajax({
 		url: "server.php",
@@ -88,8 +88,9 @@ function loadUserCharacters(){
 			var characterObject= {"Name":characterName,"Id":characterID};
 			characters.push(characterObject);
 		});
-		localStorage.setItem('characters', characters);	
-		alert(JSON.stringify(characters));
+		var chars = JSON.stringify(characters);
+		localStorage.setItem('characters', chars);	
+		alert(chars);
 
 	}).fail(function(){
 		alert("Misslyckades att hämta konto-information.");

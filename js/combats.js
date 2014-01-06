@@ -13,8 +13,16 @@ function loadCharacters(){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
 
-	var characters = localStorage.getItem("characters");
-	alert(JSON.stringify(characters));
+	var characters = JSON.parse(localStorage.getItem("characters"));
+	alert(characters);
+	
+	var mySelect = document.getElementById("characterDropdown");
+	for (var i = 0; i < characters.length; i++) {
+		var option = document.createElement("option");
+		option.text = characters[i].Name;
+		option.value = characters[i].Id;
+		mySelect.appendChild(option);
+	}
 	
 	/*
 	$.ajax({

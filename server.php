@@ -40,5 +40,13 @@
 	 *
 	 */
 	 function getBattleLog(){
+		 if(isset($_GET['key']) and isset($_GET['code']) and isset($_GET['char'])){
+			header('Content-Type: text/xml');
+			$file = "http://api.eve-online.com/char/KillLog.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
+			$fp = fopen($file, "r");
+			$data = fread($fp, 80000);
+			fclose($fp);
+			echo $data;
+		}
 	 }
 ?> 
