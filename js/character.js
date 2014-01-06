@@ -13,6 +13,8 @@ var showCharSettings = {previousToggle:null, milliSec:200,imgHeight:128,imgWidth
 	- defaultShowSize  - the default show size of the image.
 */
 
+start();
+
 /*
  * Start function.
 */

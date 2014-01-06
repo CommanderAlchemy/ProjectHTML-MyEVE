@@ -157,8 +157,4 @@ function loadPage(page){
 			alert("Det blev något fel");
 		});
 	}
-	
-	if(page == "ajax/character.html")
-		start();
-	
 }
