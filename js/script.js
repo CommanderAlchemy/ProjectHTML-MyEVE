@@ -74,8 +74,7 @@ function loadUserCharacters(){
 	$.ajax({
 		url: "server.php",
 		data: {type: "getAccountCharacter", key: keyID, code: vCode},
-		dataType: "xml",
-		async:false
+		dataType: "xml"
 	}).done(function(data){	
 		var characters = [];
 		localStorage.setItem("characters", "");
@@ -115,10 +114,13 @@ function checkWidth(){
 	else
 		mobileMode=false;
 	
-	if(mobileMode)
+	if(mobileMode){
 		$("nav").hide();
-	else
+		$("header").show();
+	}else{
 		$("nav").show();
+		$("header").hide();
+	}
 }
 
 //Checks if localStorage is available.
@@ -145,7 +147,8 @@ function toggleMenu(){
 function loadPage(page){
 	if(!loading){
 		$.ajax({
-			url: page
+			url: page,
+			async: false
 		}).done(function(data){
 			$('article').html(data);
 			if(mobileMode==true && menuOpen)
@@ -154,4 +157,8 @@ function loadPage(page){
 			alert("Det blev något fel");
 		});
 	}
+	
+	if(page == "ajax/character.html")
+		start();
+	
 }
