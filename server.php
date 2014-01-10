@@ -2,9 +2,6 @@
 	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter"){
 		getAccountCharacter();
 
-	}else if(isset($_GET['type']) && $_GET['type'] == "combat"){
-		getBattleLog();
-
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus"){
 		getAccountStatus();
 
@@ -40,20 +37,6 @@
 			echo $data;
 		}
 	}
-	
-	/*
-	 * Pjär danskjävel dokumentera!
-	 */
-	 function getBattleLog(){
-		 if(isset($_GET['key']) and isset($_GET['code']) and isset($_GET['char'])){
-			header('Content-Type: text/xml');
-			$file = "http://api.eve-online.com/char/KillLog.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
-			$fp = fopen($file, "r");
-			$data = fread($fp, 80000);
-			fclose($fp);
-			echo $data;
-		}
-	 }
 
     /*
      * Get account information
