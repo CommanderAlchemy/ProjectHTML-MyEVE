@@ -15,6 +15,9 @@ function start(){
 	});
 }
 
+/*
+* Load characters from localStorage
+*/
 function loadCharacters(){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
@@ -30,6 +33,11 @@ function loadCharacters(){
 	}
 }
 
+/*
+* Load Kill log
+*
+* charId: Character ID.
+*/
 function loadCharacterFights(charId){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
