@@ -72,6 +72,6 @@ function loadCharacterFights(charId){
 			);
 		}
 	}).fail(function() {
-		alert("Misslyckades att hämta konto information.");
+		$('#content > ul').html('Mördarloggen kunde inte hämtas');
 	});
 }
