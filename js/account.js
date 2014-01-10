@@ -3,9 +3,9 @@ getAccountStatus(0);
  Get character information for each account.
  This uses EVE - API : https://api.eveonline.com/account/AccountStatus.xml.aspx?
     paidUntil       how long the account is paid for.
-    createDate      what date the character was created.
-    logonCount      how many times the character was logged in to the eve account.
-    logonMinutes    how many minutes the character has been logged in.
+    createDate      what date the account was created.
+    logonCount      how many times the account was logged in to the eve account.
+    logonMinutes    how many minutes the account has been logged in.
 */
 
 // Array that get stored in local storage.
@@ -57,7 +57,7 @@ function getAccountStatus(index){
                 // When the itteration is done store the whole array in localstorage.
                 var accounts = JSON.stringify(accountStatus);
                 localStorage.setItem("accounts", accounts);
-                alert("accounts" + accounts);
+                //lert("accounts" + accounts);
                 loadAccountStatus();
             }
     });
@@ -72,9 +72,9 @@ function getAccountStatus(index){
 */
 function loadAccountStatus(){
     var accounts = JSON.parse(localStorage.getItem("accounts"));
-    alert(accounts);
     var totalPlayTime,
         paidUntil,
+        expires,
         logonCount;
 
 /*    for (var i = accounts.length -1; i > 0; i--){
@@ -84,6 +84,17 @@ function loadAccountStatus(){
     totalPlayTime = parseInt(accounts[0].logonMinutes);
     paidUntil = accounts[0].paidUntil;
     logonCount = accounts[0].logonCount;
+
+
+    var currentDate = new Date();
+    expires = new Date(paidUntil);
+    currentDate_unixtime = parseInt(currentDate.getTime() / 1000);
+    expires_unixtime = parseInt(expires.getTime() / 1000);
+
+    // Difference
+    var timeDiffSec = expires_unixtime - currentDate_unixtime;
+    var timeDiffHours = timeDiffSec / 60 / 60;
+    var timeDiffDays = timeDiffHours  / 24;
 
     // Convert from minutes to...
     var years = Math.floor(totalPlayTime / 525600);
@@ -103,9 +114,8 @@ function loadAccountStatus(){
 
     var minutes = totalPlayTime;
 
-
-    $("#accountExpire").append(paidUntil);
-    $("#logonCount").append(logonCount)
+    $("#accountExpire").append("om " + Math.floor(timeDiffDays) + " dagar (" + paidUntil + ")");
+    $("#logonCount").append(logonCount);
     $("#gametime").append(years + " År, " +
                           months + " Månader, " +
                           weeks + " Veckor, " +
