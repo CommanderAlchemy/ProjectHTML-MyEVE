@@ -1,11 +1,17 @@
 start();
 
+/*
+* Denna funktion använder sig av "Kill log"-api:t.
+*/
+
 function start(){
+	localStorage.cacheXML = "";
+	
 	loadCharacters();
 	
-	$('#characterForm').on("submit", function(e){		
-		e.preventDefault();
-		loadCharacterFights();
+	loadCharacterFights($('#characterDropdown :selected').val());
+	$('#characterDropdown').on("change", function(e){
+		loadCharacterFights($('#characterDropdown :selected').val());
 	});
 }
 
@@ -14,7 +20,6 @@ function loadCharacters(){
 	var vCode	 	= localStorage.getItem("vCode");
 
 	var characters = JSON.parse(localStorage.getItem("characters"));
-	alert(characters);
 	
 	var mySelect = document.getElementById("characterDropdown");
 	for (var i = 0; i < characters.length; i++) {
@@ -23,40 +28,38 @@ function loadCharacters(){
 		option.value = characters[i].Id;
 		mySelect.appendChild(option);
 	}
-	
-	/*
-	$.ajax({
-		url: "server.php",
-		data: {key: keyID, code: vCode},
-		dataType: "xml"
-	}).done(function(data){
-		$(data).find('row').each(function(){
-			var characterName 		= $(this).attr('name');
-			var characterID 		= $(this).attr('characterID');
-			
-			$("#characterDropdown").append("<option value='"+characterID+"'>"+characterName+"</option>");
-		});
-		stopLoad();
-	}).fail(function(){
-		alert("Misslyckades att hämta konto information.");
-	});	
-	*/
 }
 
-function loadCharacterFights(){
+function loadCharacterFights(charId){
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
-	var characterID	= $("#characterDropdown").val();
-
+	
+	var URL = "https://zkillboard.com/api/kills/characterID/" + charId;
+	
+	$('#content > ul').html('');
 	$.ajax({
-		url: "server.php",
-		data: {type: "combat", key: keyID, code: vCode, char: characterID},
-		dataType: "xml"
+		url: URL,
+		dataType:"json"
 	}).done(function(data){
-		$(data).find('row').each(function(){
-			alert($(this));
-		});
-	}).fail(function(){
+		if (data.length == 0)
+			$('#content > ul').html('Mördarloggen är tom');
+		for (var i = 0; i < data.length; i++) {			
+			var d = data[i];
+			var killTime = d.killTime;
+			var victimName = d.victim.characterName;
+			var victimCorp = d.victim.corporationName;
+			//var totalVal = d.zkb.totalValue;
+			
+			if (victimName === "")
+				victimName = "Other";
+			
+			$('#content > ul').append(
+				'<div class="kill">' +
+				'<h1>Victim: </h1>' + victimName +
+				'</div>'
+			);
+		}
+	}).fail(function() {
 		alert("Misslyckades att hämta konto information.");
-	});	
+	});
 }

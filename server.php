@@ -10,7 +10,7 @@
 
 	}
 
-	if(isset($_GET['character'])){
+	/*if(isset($_GET['character'])){
 		header('Content-Type: text');
 		$file = "http://image.eveonline.com/character/".$_GET['character'];
 		$fp = fopen($file, "r");
@@ -24,7 +24,7 @@
 		$data = fread($fp, 80000);
 		fclose($fp);
 		echo $data;
-	}
+	}*/
 	
 	/*
 	 * Using this function to validate account keyID and vCode.
