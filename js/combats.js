@@ -45,18 +45,30 @@ function loadCharacterFights(charId){
 			$('#content > ul').html('Mördarloggen är tom');
 		for (var i = 0; i < data.length; i++) {			
 			var d = data[i];
+			var killer = "";
 			var killTime = d.killTime;
 			var victimName = d.victim.characterName;
 			var victimCorp = d.victim.corporationName;
-			//var totalVal = d.zkb.totalValue;
+			
+			for (var j = 0; j < d.attackers.length; j++) {
+				if (d.attackers[j].finalBlow == 1) {
+					killer = d.attackers[j].characterName;
+					break;	
+				}
+			}
 			
 			if (victimName === "")
 				victimName = "Other";
 			
 			$('#content > ul').append(
-				'<div class="kill">' +
-				'<h1>Victim: </h1>' + victimName +
-				'</div>'
+				'<li>' +
+				'<div>' +
+				'<h1> Killer: ' + killer + '</h1>' +
+				'<h1>Victim: ' + victimName + '</h1>' +
+				'<p>Corporation: ' + victimCorp + '</p>' +
+				killTime +
+				'</div>' +
+				'</li>'
 			);
 		}
 	}).fail(function() {
