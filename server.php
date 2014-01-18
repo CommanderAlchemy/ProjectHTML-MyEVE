@@ -1,10 +1,12 @@
 <?php
 	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter"){
 		getAccountCharacter();
-
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus"){
 		getAccountStatus();
-
+	}else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
+		getAssets();
+	}else if(isset($_GET['type']) && $_GET['type'] == "getMarket") {
+		getMarket();	
 	}
 
 	/*if(isset($_GET['character'])){
@@ -51,4 +53,32 @@
 			echo $data;
         }
     }
+	
+	/*
+	 * Get list of assets.
+	 */
+	function getAssets() {
+		if(isset($_GET['key']) and isset($_GET['code']) and isset($_GET['char'])){
+            header('Content-Type: text/xml');
+            $file = "https://api.eveonline.com/char/AssetList.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
+            $fp = fopen($file, "r");
+			$data = fread($fp, 80000);
+			fclose($fp);
+			echo $data;
+        }
+	}
+	
+	/*
+	 * Get sales of an item.
+	 */
+	function getMarket() {
+		if(isset($_GET['typeid'])){
+            header('Content-Type: text/xml');
+            $file = "http://api.eve-central.com/api/quicklook?typeid=".$_GET['typeid'];
+            $fp = fopen($file, "r");
+			$data = fread($fp, 80000);
+			fclose($fp);
+			echo $data;
+        }
+	}
 ?>
