@@ -50,7 +50,11 @@
             header('Content-Type: text/xml');
             $file = "https://api.eveonline.com/char/CharacterSheet.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
             $fp = fopen($file, "r");
-			$data = fread($fp, 80000);
+            $fp = fopen($file, "r");
+			$data = '';
+			while(!feof($fp)) {
+				$data .= fread($fp, 20000);
+			}
 			fclose($fp);
 			echo $data;
         }
