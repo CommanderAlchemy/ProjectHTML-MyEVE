@@ -20,6 +20,7 @@ start();
 */
 function start(){
 	loadCharacters();
+    getCharacterSheet();
 }
  
 /*
@@ -85,4 +86,31 @@ function showCharacterInfo(){
 	}else
 		showCharSettings.previousToggle = null;
 	
+}
+
+function getCharacterSheet(){
+    	$.ajax({
+		url: "server.php",
+		data: {type: "getAccountCharacter", key: loadCharSettings.keyID, code: loadCharSettings.vCode},
+		dataType: "xml"
+	}).done(function(data){
+		$(data).find('row').each(function(){
+			var characterName 		= $(this).attr('name'),
+				characterID 		= $(this).attr('characterID'),
+				corporationName 	= $(this).attr('corporationName'),
+				corporationID 		= $(this).attr('corporationID'),
+				imageID = "http://image.eveonline.com/character/"+characterID+"_256.jpg";
+
+			$("#content > ul").append("<li class='characterItem' data-rowId='"+characterID+"'>"+
+				"<span>"+characterName+"<img src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span>"+
+				"<div style='display:none;'>Corporation Name: "+corporationName+
+				"<br>Corporation ID: "+corporationID+"<br>Character ID: "+characterID+"</div></li>");
+		});
+
+		$(".characterItem").on("click", showCharacterInfo);
+	}).fail(function(){
+		alert(loadCharSettings.failMsg);
+	});
+}
+
 }
