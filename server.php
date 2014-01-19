@@ -62,7 +62,7 @@
         }
     }
 
-	function getAccountCharacter(){
+	function getCharacterInfo(){
 		if(isset($_GET['key']) and isset($_GET['code'])){
 			header('Content-Type: text/xml');
 			$file = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code'];
