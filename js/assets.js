@@ -17,6 +17,8 @@ function start(){
 * Load characters from localStorage
 */
 function loadCharacters(){
+	$("#value").text("(Loading...)");
+	
 	var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
 
@@ -98,5 +100,5 @@ function calcAssetsValue(items) {
 	for (var i = 0; i < items.length; i++) {
 		value += (items[i].quantity * items[i].price);
 	}
-	$("#value").text(value.toFixed(2));
+	$("#value").text(value.toFixed(2) + " ISK");
 }
