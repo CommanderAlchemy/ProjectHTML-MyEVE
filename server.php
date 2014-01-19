@@ -53,7 +53,7 @@
             $fp = fopen($file, "r");
 			$data = '';
 			while(!feof($fp)) {
-				$data .= fread($fp, 20000);
+				$data .= fread($fp, 80000);
 			}
 			fclose($fp);
 			echo $data;
@@ -84,7 +84,7 @@
             $fp = fopen($file, "r");
 			$data = '';
 			while(!feof($fp)) {
-				$data .= fread($fp, 20000);
+				$data .= fread($fp, 80000);
 			}
 			fclose($fp);
 			echo $data;
