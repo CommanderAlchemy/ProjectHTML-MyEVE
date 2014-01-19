@@ -47,7 +47,6 @@ function loadCharacters(){
 				"<br>Corporation ID: "+corporationID+"<br>Character ID: "+characterID+"</div></li>");
 		});
 		$(".characterItem").on("click", showCharacterInfo);
-        alert("NuKörVi");
         getCharacterSheet(0);
 	}).fail(function(){
 		alert(loadCharSettings.failMsg);
@@ -96,7 +95,6 @@ function showCharacterInfo(){
 }
 
 function getCharacterSheet(index){
-    alert("Getting sheets " + index);
     var keyID	 	= localStorage.getItem("keyID");
 	var vCode	 	= localStorage.getItem("vCode");
 	var characters = JSON.parse(localStorage.getItem("characters"));
@@ -134,8 +132,6 @@ function getCharacterSheet(index){
                                     "balance"           :   balance };
 
             // Push caracter object into the accountStatus array
-            var character = JSON.stringify(charObject);
-            alert(character);
             charactersObjects.push(charObject);
 
             // If there are more characters left itterate
