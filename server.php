@@ -9,6 +9,8 @@
 		getAssets();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getCharacterSheet") {
 		getCharacterSheet();
+	}else if(isset($_GET['type']) && $_GET['type'] == "getCharacterInfo") {
+		getCharacterInfo();
 	}
 
 	/*if(isset($_GET['character'])){
@@ -59,6 +61,19 @@
 			echo $data;
         }
     }
+
+	function getAccountCharacter(){
+		if(isset($_GET['key']) and isset($_GET['code'])){
+			header('Content-Type: text/xml');
+			$file = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code'];
+			$fp = fopen($file, "r");
+			$data = fread($fp, 80000);
+			fclose($fp);
+			echo $data;
+		}
+	}
+
+
 
     /*
      * Get account information
