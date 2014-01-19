@@ -42,9 +42,7 @@ function loadCharacters(){
 				imageID = "http://image.eveonline.com/character/"+characterID+"_256.jpg";
 			
 			$("#content > ul").append("<li class='characterItem' data-rowId='"+characterID+"'>"+
-				"<span>"+characterName+"<img src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span>"+
-				"<div style='display:none;'>Corporation Name: "+corporationName+
-				"<br>Corporation ID: "+corporationID+"<br>Character ID: "+characterID+"</div></li>");
+				"<span>"+characterName+"<img src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span></li>");
 		});
 		$(".characterItem").on("click", showCharacterInfo);
         getCharacterSheet(0);
@@ -54,7 +52,24 @@ function loadCharacters(){
 }
 
 function loadCharacterSheet(){
-    alert("LoadCharacterSTUB");
+    var characters      = JSON.parse(localStorage.getItem("characters"));
+    var characterSheet  = JSON.parse(localStorage.getItem("characterSheet"));
+    for(var i =  characters.length -1; i >= 0; i--) {
+
+    $("ul [data-rowid=" + characters[i].Id + "]").append("<div style='display:none;'>"  +
+                            "Corporation: "     +   characterSheet[i].corporationName   + "<br>"        +
+                            "Alliance: "        +   characterSheet[i].allianceName      + "<br><br>"    +
+
+                            "Race: "            +   characterSheet[i].race              + "<br>"        +
+                            "Gender: "          +   characterSheet[i].gender            + "<br>"        +
+                            "Bloodline: "       +   characterSheet[i].bloodLine         + "<br>"        +
+                            "Ancestry: "        +   characterSheet[i].ancestry          + "<br><br>"    +
+
+                            "Clone: "           +   characterSheet[i].cloneName         + "<br>"        +
+                            "Skillpoints: "     +   "unkown/" + characterSheet[i].cloneSkillPoints  + "<br><br>"    +
+
+                            "Wallet Ballance: " +   characterSheet[i].balance + " ISK");
+    }
 }
 
 
@@ -125,6 +140,7 @@ function getCharacterSheet(index){
                                     "race"              :   race,
                                     "bloodLine"         :   bloodLine,
                                     "ancestry"          :   ancestry,
+                                    "gender"            :   gender,
                                     "corporationName"   :   corporationName,
                                     "allianceName"      :   allianceName,
                                     "cloneName"         :   cloneName,
