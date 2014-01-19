@@ -3,12 +3,12 @@
 		getAccountCharacter();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus") {
 		getAccountStatus();
-    }else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
-        getCharacterSheet();
+    }else if(isset($_GET['type']) && $_GET['type'] == "getMarket") {
+        getMarket();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
 		getAssets();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getCharacterSheet") {
-		getMarket();	
+		getCharacterSheet();
 	}
 
 	/*if(isset($_GET['character'])){
