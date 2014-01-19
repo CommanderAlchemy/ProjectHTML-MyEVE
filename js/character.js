@@ -13,6 +13,9 @@ var showCharSettings = {previousToggle:null, milliSec:200,imgHeight:128,imgWidth
 	- defaultShowSize  - the default show size of the image.
 */
 
+// Array that get stored in local storage.
+var charactersObjects = [];
+
 start();
 
 /*
@@ -20,7 +23,6 @@ start();
 */
 function start(){
 	loadCharacters();
-    getCharacterSheet();
 }
  
 /*
@@ -44,11 +46,16 @@ function loadCharacters(){
 				"<div style='display:none;'>Corporation Name: "+corporationName+
 				"<br>Corporation ID: "+corporationID+"<br>Character ID: "+characterID+"</div></li>");
 		});
-		
-		$(".characterItem").on("click", showCharacterInfo); 
+		$(".characterItem").on("click", showCharacterInfo);
+        alert("NuKörVi");
+        getCharacterSheet(0);
 	}).fail(function(){
 		alert(loadCharSettings.failMsg);
 	});	
+}
+
+function loadCharacterSheet(){
+    alert("LoadCharacterSTUB");
 }
 
 
@@ -88,29 +95,61 @@ function showCharacterInfo(){
 	
 }
 
-function getCharacterSheet(){
-    	$.ajax({
+function getCharacterSheet(index){
+    alert("Getting sheets " + index);
+    var keyID	 	= localStorage.getItem("keyID");
+	var vCode	 	= localStorage.getItem("vCode");
+	var characters = JSON.parse(localStorage.getItem("characters"));
+
+	$.ajax({
 		url: "server.php",
-		data: {type: "getAccountCharacter", key: loadCharSettings.keyID, code: loadCharSettings.vCode},
+		data: {type: "getCharacterSheet", key: keyID, code: vCode, char: characters[index].Id},
 		dataType: "xml"
 	}).done(function(data){
-		$(data).find('row').each(function(){
-			var characterName 		= $(this).attr('name'),
-				characterID 		= $(this).attr('characterID'),
-				corporationName 	= $(this).attr('corporationName'),
-				corporationID 		= $(this).attr('corporationID'),
-				imageID = "http://image.eveonline.com/character/"+characterID+"_256.jpg";
+        var cachedUntil             = $(data).find("cachedUntil").text();
 
-			$("#content > ul").append("<li class='characterItem' data-rowId='"+characterID+"'>"+
-				"<span>"+characterName+"<img src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span>"+
-				"<div style='display:none;'>Corporation Name: "+corporationName+
-				"<br>Corporation ID: "+corporationID+"<br>Character ID: "+characterID+"</div></li>");
-		});
+		$(data).find("result").each(function(){
+            // Query information per character in account
+            var name                = $(this).find("name").text(),
+				race                = $(this).find("race").text(),
+				bloodLine           = $(this).find("bloodLine").text(),
+                ancestry            = $(this).find("ancestry").text(),
+				gender              = $(this).find("gender").text(),
+                corporationName     = $(this).find("corporationName").text(),
+                allianceName        = $(this).find("allianceName").text(),
+                cloneName           = $(this).find("cloneName").text(),
+                cloneSkillPoints    = $(this).find("cloneSkillPoints").text(),
+                balance             = $(this).find("balance").text();
 
-		$(".characterItem").on("click", showCharacterInfo);
-	}).fail(function(){
-		alert(loadCharSettings.failMsg);
+            // Create object for each character
+            var charObject   = {    "CharID"            :   characters[index].Id,
+                                    "name"              :   name,
+                                    "race"              :   race,
+                                    "bloodLine"         :   bloodLine,
+                                    "ancestry"          :   ancestry,
+                                    "corporationName"   :   corporationName,
+                                    "allianceName"      :   allianceName,
+                                    "cloneName"         :   cloneName,
+                                    "cloneSkillPoints"  :   cloneSkillPoints,
+                                    "balance"           :   balance };
+
+            // Push caracter object into the accountStatus array
+            var character = JSON.stringify(charObject);
+            alert(character);
+            charactersObjects.push(charObject);
+
+            // If there are more characters left itterate
+            if (index < characters.length -1){
+                getCharacterSheet(++index);
+            } else {
+                // When the itteration is done store the whole array in localstorage.
+                var accounts = JSON.stringify(charactersObjects);
+                localStorage.setItem("characterSheet", accounts);
+                loadCharacterSheet();
+            }
+    });
+
+    }).fail(function(){
+		alert("Misslyckades att hämta karaktär information för kontot");
 	});
-}
-
 }
