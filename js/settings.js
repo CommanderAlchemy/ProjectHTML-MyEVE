@@ -37,6 +37,8 @@ function saveSettings(name, keyID, vCode){
 	localStorage.setItem("vCode", vCode);
 	localStorage.setItem("keyID", keyID);
 	localStorage.setItem("name", name);
+	loading = false;
+	loadUserCharacters();
 }
 
 function loadSettings(){

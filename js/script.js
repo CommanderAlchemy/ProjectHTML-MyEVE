@@ -4,6 +4,7 @@ var mobileMode =false;
 var mobileSize = 500;
 var menuOpen = false;
 var loading = false;
+var settings = true;
 
 //Shows loading message.
 function startLoad(){
@@ -60,6 +61,7 @@ function start(){
 function checkSettings(){
 	if(localStorage.getItem("vCode") == null || localStorage.getItem("keyID") == null){
 		loadPage("ajax/settings.html");
+		loading = true;
 	}else{
 		loadUserCharacters();
 		loadPage("ajax/character.html");
@@ -90,12 +92,10 @@ function loadUserCharacters(){
 		var chars = JSON.stringify(characters);
 		localStorage.setItem('characters', chars);	
 		alert(chars);
-
 	}).fail(function(){
 		alert("Misslyckades att hämta konto-information.");
 	});	
 }
-
 
 //Initiates the menu listener.
 function initMenuListener(){
