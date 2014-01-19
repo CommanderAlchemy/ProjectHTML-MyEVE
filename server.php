@@ -41,6 +41,20 @@
 	}
 
     /*
+     * Get character sheet
+     */
+    function getCharacterSheet(){
+         if(isset($_GET['key']) and isset($_GET['code']) and isset($_GET['char'])){
+            header('Content-Type: text/xml');
+            $file = "https://api.eveonline.com/char/CharacterSheet.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
+            $fp = fopen($file, "r");
+			$data = fread($fp, 80000);
+			fclose($fp);
+			echo $data;
+        }
+    }
+
+    /*
      * Get account information
      */
     function getAccountStatus(){
