@@ -1,2 +1,10 @@
 /* CSS Document */
 
+#content > h1 {
+	display:inline;
+	font-weight:bold;	
+}
+
+#content > p {
+	display:inline;
+}
