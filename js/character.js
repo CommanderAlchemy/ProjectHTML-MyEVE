@@ -57,18 +57,21 @@ function loadCharacterSheet(){
     for(var i =  characters.length -1; i >= 0; i--) {
 
     $("ul [data-rowid=" + characters[i].Id + "]").append("<div style='display:none;'>"  +
-                            "Corporation: "     +   characterSheet[i].corporationName   + "<br>"        +
-                            "Alliance: "        +   characterSheet[i].allianceName      + "<br><br>"    +
+                "Corporation: "         +   characterSheet[i].corporationName   + "<br>"        +
+                "Alliance: "            +   characterSheet[i].allianceName      + "<br><br>"    +
 
-                            "Race: "            +   characterSheet[i].race              + "<br>"        +
-                            "Gender: "          +   characterSheet[i].gender            + "<br>"        +
-                            "Bloodline: "       +   characterSheet[i].bloodLine         + "<br>"        +
-                            "Ancestry: "        +   characterSheet[i].ancestry          + "<br><br>"    +
+                "Race: "                +   characterSheet[i].race              + "<br>"        +
+                "Gender: "              +   characterSheet[i].gender            + "<br>"        +
+                "Bloodline: "           +   characterSheet[i].bloodLine         + "<br>"        +
+                "Ancestry: "            +   characterSheet[i].ancestry          + "<br><br>"    +
 
-                            "Clone: "           +   characterSheet[i].cloneName         + "<br>"        +
-                            "Skillpoints: "     +   "unkown/" + characterSheet[i].cloneSkillPoints  + "<br><br>"    +
+                "Clone: "               +   characterSheet[i].cloneName         + "<br>"        +
+                "Skillpoints: "         +   characterSheet[i].skillPoints       + " / "         +                                                             characterSheet[i].cloneSkillPoints  + "<br>"        +
+                "Security Status: "     +   characterSheet[i].securityStatus    + "<br>"        +
+                "Ship: "                +   characterSheet[i].shipTypeName      + "<br>"        +
+                "Location: "              +   characterSheet[i].lastKnownLocation + "<br><br>"  +
 
-                            "Wallet Ballance: " +   characterSheet[i].balance + " ISK");
+                "Wallet Ballance: "     +   characterSheet[i].balance + " ISK");
     }
 }
 
@@ -110,9 +113,34 @@ function showCharacterInfo(){
 }
 
 function getCharacterSheet(index){
-    var keyID	 	= localStorage.getItem("keyID");
-	var vCode	 	= localStorage.getItem("vCode");
-	var characters = JSON.parse(localStorage.getItem("characters"));
+    var keyID               = localStorage.getItem("keyID"),
+        vCode	 	        = localStorage.getItem("vCode"),
+        characters          = JSON.parse(localStorage.getItem("characters"));
+
+    var skillPoints         = undefined,
+        shipTypeName        = undefined,
+        lastKnownLocation   = undefined,
+        securityStatus      = undefined;
+
+    $.ajax({
+		url: "server.php",
+		data: {type: "getCharacterInfo", key: keyID, code: vCode, char: characters[index].Id},
+		dataType: "xml"
+	}).done(function(data){
+
+		$(data).find("result").each(function(){
+            // Query information per character in account
+                skillPoints         = $(this).find("skillPoints").text();
+                shipTypeName        = $(this).find("shipTypeName").text();
+				lastKnownLocation   = $(this).find("lastKnownLocation").text();
+                securityStatus      = $(this).find("securityStatus").text();
+
+    });
+
+    }).fail(function(){
+		alert("Misslyckades att hämta karaktär information för kontot");
+	});
+
 
 	$.ajax({
 		url: "server.php",
@@ -145,6 +173,10 @@ function getCharacterSheet(index){
                                     "allianceName"      :   allianceName,
                                     "cloneName"         :   cloneName,
                                     "cloneSkillPoints"  :   cloneSkillPoints,
+                                    "skillPoints"       :   skillPoints,
+                                    "shipTypeName"      :   shipTypeName,
+                                    "lastKnownLocation" :   lastKnownLocation,
+                                    "securityStatus"    :   securityStatus,
                                     "balance"           :   balance };
 
             // Push caracter object into the accountStatus array
