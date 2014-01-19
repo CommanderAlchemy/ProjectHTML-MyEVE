@@ -62,16 +62,16 @@
         }
     }
 
-	function getCharacterInfo(){
-		if(isset($_GET['key']) and isset($_GET['code'])){
-			header('Content-Type: text/xml');
-			$file = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code'];
-			$fp = fopen($file, "r");
+    function getCharacterInfo(){
+         if(isset($_GET['key']) and isset($_GET['code']) and isset($_GET['char'])){
+            header('Content-Type: text/xml');
+            $file = "https://api.eveonline.com/eve/CharacterInfo.xml.aspx?keyID=".$_GET['key']."&vCode=".$_GET['code']."&characterID=".$_GET['char'];
+            $fp = fopen($file, "r");
 			$data = fread($fp, 80000);
 			fclose($fp);
 			echo $data;
-		}
-	}
+        }
+    }
 
 
 
