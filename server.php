@@ -1,11 +1,13 @@
 <?php
-	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter"){
+	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter") {
 		getAccountCharacter();
-	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus"){
+	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus") {
 		getAccountStatus();
+    }else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
+        getCharacterSheet();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
 		getAssets();
-	}else if(isset($_GET['type']) && $_GET['type'] == "getMarket") {
+	}else if(isset($_GET['type']) && $_GET['type'] == "getCharacterSheet") {
 		getMarket();	
 	}
 
