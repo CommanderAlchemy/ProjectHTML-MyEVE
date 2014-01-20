@@ -80,25 +80,44 @@ function loadAssetValues(items) {
    alert(searchType);
 
 	$.ajax({
-		type: 'GET',
+		type: 'POST',
 		url: "server.php",
 		data: {type: "getMarket", 
 				typeid: searchType},
 		dataType: "xml",
 		timeout: 10000
 	}).done(function(data){
-		var array = new Array();
+        console.log(data);
+        var prices = [];
 		$(data).find("type").each(function(){
             var typeID  =  $(this).attr("id"),
                 price;
 
              $(this).find("sell").each(function(){
-                price   = $(this).find("volume").text();
-                alert(price);
+                price   = $(this).find("median").text();
              });
+            console.log(typeID + ", " + price);
 
-            alert(typeID + ", " + price);
+            var priceObject   = {   "typeID"    :   typeID,
+                                    "price"      :   price };
+
+            prices.push(priceObject);
+
         });
+        localStorage.setItem("prices", JSON.stringify(prices));
+
+        for (var i = 0; i <= prices.length -1; i++){
+            var typeID  = prices[i].typeID,
+                price   = prices[i].price;
+
+            for(var j = 0; j <= items.length -1; j++) {
+                if (typeID == items[j].type)
+                    items[j].price = Number(price);
+            }
+        }
+        localStorage.items = JSON.stringify(items);
+        calcAssetsValue(items);
+
 
 
 
