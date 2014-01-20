@@ -1,9 +1,10 @@
 <?php
+
 	if(isset($_GET['type']) && $_GET['type'] == "getAccountCharacter") {
 		getAccountCharacter();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAccountStatus") {
 		getAccountStatus();
-    }else if(isset($_GET['type']) && $_GET['type'] == "getMarket") {
+    }else if(isset($_POST['type']) && $_POST['type'] == "getMarket") {
         getMarket();
 	}else if(isset($_GET['type']) && $_GET['type'] == "getAssets") {
 		getAssets();
@@ -120,13 +121,13 @@ fclose($handle);
 	 * Get sales of an item.
 	 */
 	function getMarket() {
-		if(isset($_GET['typeid'])){
+		if(isset($_POST['typeid'])){
             header('Content-Type: text/xml');
-            $file = "http://api.eve-central.com/api/marketstat?typeid=".$_GET['typeid']."&usesystem=30000142";
+            $file = "http://api.eve-central.com/api/marketstat?typeid=".$_POST['typeid']."&usesystem=30000142";
             $fp = fopen($file, "r");
 			$data = '';
 			while(!feof($fp)) {
-				$data .= fread($fp, 80000);
+				$data .= fread($fp, 800000);
 			}
 			fclose($fp);
 			echo $data;
