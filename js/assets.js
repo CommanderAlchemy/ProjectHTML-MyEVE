@@ -61,35 +61,57 @@ function loadCharacterAssets(charId) {
 		
 		var str = JSON.stringify(items);
 		localStorage.items = str;
-		
-		loadAssetValues(items, 0);
+		alert(items.length);
+		loadAssetValues(items);
 	}).fail(function(){
 		alert("Failed to contact API!");
 	});
 }
 
-function loadAssetValues(items, counter) {
-	var itemType = items[counter].type;
+function loadAssetValues(items) {
+	//var itemType = items[counter].type;
+    var searchType = undefined;
+    for ( var i = 0; i <= items.length -1; i++ ) {
+        if ( i > 0 )
+            searchType += "&typeid=" + items[i].type;
+        else
+            searchType = items[i].type;
+    }
+   alert(searchType);
+
 	$.ajax({
 		type: 'GET',
 		url: "server.php",
 		data: {type: "getMarket", 
-				typeid: itemType},
+				typeid: searchType},
 		dataType: "xml",
 		timeout: 10000
 	}).done(function(data){
 		var array = new Array();
-		$(data).find("median").each(function() {
-			array.push($(this).text());
+		$(data).find("type").each(function(){
+            var typeID  =  $(this).attr("id"),
+                price;
+
+             $(this).find("sell").each(function(){
+                price   = $(this).find("volume").text();
+                alert(price);
+             });
+
+            alert(typeID + ", " + price);
         });
-		items[counter].price = Number(array[array.length - 1]);
+
+
+
+
+
+/*		items[counter].price = Number(array[array.length - 1]);
 		
 		if (counter < items.length - 1) {
 			loadAssetValues(items, counter + 1);
 		} else {
 			localStorage.items = JSON.stringify(items);
 			calcAssetsValue(items);	
-		}
+		}*/
 	}).fail(function(e){
 		alert("Failed to contact API! loadAssets");
 	});

@@ -124,7 +124,10 @@ fclose($handle);
             header('Content-Type: text/xml');
             $file = "http://api.eve-central.com/api/marketstat?typeid=".$_GET['typeid'];
             $fp = fopen($file, "r");
-			$data = fread($fp, 80000);
+			$data = '';
+			while(!feof($fp)) {
+				$data .= fread($fp, 80000);
+			}
 			fclose($fp);
 			echo $data;
         }
