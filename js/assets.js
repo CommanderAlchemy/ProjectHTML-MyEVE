@@ -1,3 +1,10 @@
+var prices = [];
+var temp = [];
+var size = 0;
+var requests = 0,
+    arrays = 0,
+    loops = 0;
+
 start();
 
 /*
@@ -5,6 +12,8 @@ start();
 */
 
 function start(){
+    localStorage.items = null;
+    prices = [];
 	loadCharacters();
 	
 	loadCharacterAssets($('#characterDropdown :selected').val());
@@ -61,7 +70,16 @@ function loadCharacterAssets(charId) {
 		
 		var str = JSON.stringify(items);
 		localStorage.items = str;
-		alert(items.length);
+		alert("Char got " + items.length + " items");
+        size = items.length;
+        prices = [];
+        temp = $.extend(true, [],items);
+
+        loops = 0,
+            arrays = 0,
+            requests = 0;
+
+
 		loadAssetValues(items);
 	}).fail(function(){
 		alert("Failed to contact API!");
@@ -69,34 +87,43 @@ function loadCharacterAssets(charId) {
 }
 
 function loadAssetValues(items) {
+    arrays++;
+    console.log("ITEMS: " + items.length + " " + JSON.stringify(items));
 	//var itemType = items[counter].type;
-    var searchType = undefined;
+    var searchType = "";
+   while(items.length > 1){
+       loadAssetValues(items.splice(0,1));
+   }
+
     for ( var i = 0; i <= items.length -1; i++ ) {
         if ( i > 0 )
             searchType += "&typeid=" + items[i].type;
         else
             searchType = items[i].type;
     }
-   alert(searchType);
-
+/*   alert(searchType);*/
 	$.ajax({
-		type: 'POST',
+		type: 'post',
 		url: "server.php",
 		data: {type: "getMarket", 
 				typeid: searchType},
 		dataType: "xml",
-		timeout: 10000
+		timeout: 800000
 	}).done(function(data){
-        console.log(data);
-        var prices = [];
+        requests++;
 		$(data).find("type").each(function(){
+
+
+            loops++;
+
             var typeID  =  $(this).attr("id"),
                 price;
+
+
 
              $(this).find("sell").each(function(){
                 price   = $(this).find("median").text();
              });
-            console.log(typeID + ", " + price);
 
             var priceObject   = {   "typeID"    :   typeID,
                                     "price"      :   price };
@@ -104,19 +131,28 @@ function loadAssetValues(items) {
             prices.push(priceObject);
 
         });
+
+        console.log("Prices storage is " + prices.length);
+        console.log("Contents " + JSON.stringify(prices));
+        console.log("Requests completed: " + requests);
+        console.log("Arrays created: " + arrays);
+        console.log("Data IDs parsed: " + loops);
+        if(prices.length == size){
         localStorage.setItem("prices", JSON.stringify(prices));
 
         for (var i = 0; i <= prices.length -1; i++){
             var typeID  = prices[i].typeID,
                 price   = prices[i].price;
 
-            for(var j = 0; j <= items.length -1; j++) {
-                if (typeID == items[j].type)
-                    items[j].price = Number(price);
+            for(var j = 0; j <= temp.length -1; j++) {
+                if (typeID == temp[j].type)
+                    temp[j].price = Number(price);
             }
         }
-        localStorage.items = JSON.stringify(items);
-        calcAssetsValue(items);
+        localStorage.items = JSON.stringify(temp);
+        console.log(JSON.stringify(temp));
+        calcAssetsValue(temp);
+        }
 
 
 
@@ -137,6 +173,7 @@ function loadAssetValues(items) {
 }
 
 function calcAssetsValue(items) {
+    console.log(temp.length + " went to calculate quantity");
 	var value = 0;
 	for (var i = 0; i < items.length; i++) {
 		value += (items[i].quantity * items[i].price);
