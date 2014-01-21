@@ -78,10 +78,14 @@ article p {
 
 article li > div {
 	font-size:10px;
-	height:150px;
-	width:40%;
-	background-color:#fff;
-	margin:10px;
+	height:auto;
+	width:56%;
+    color:rgba(255,255,255,1);
+	background-color:rgba(0,0,0,.5);;
+    padding:10px;
+    border:2px solid rgba(227,145,0,1);
+    text-shadow:0px 0px 4px rgba(0,0,0,1);
+    box-shadow:0px 0px 2px rgba(0,0,0,1);
 }
 
 #content li {
@@ -89,6 +93,25 @@ article li > div {
 	height:auto;
 	overflow:hidden;
 	display:block;
+    background: rgb(76,76,76); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(76,76,76,1) 0%, rgba(89,89,89,1) 24%, rgba(0,0,0,1) 25%, rgba(19,20,73,1) 26%, rgba(31,30,79,1) 100%, rgba(17,17,17,1) 100%, rgba(0,0,0,1) 100%, rgba(44,44,44,1) 100%, rgba(17,17,17,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(24%,rgba(89,89,89,1)), color-stop(25%,rgba(0,0,0,1)), color-stop(26%,rgba(19,20,73,1)), color-stop(100%,rgba(31,30,79,1)), color-stop(100%,rgba(17,17,17,1)), color-stop(100%,rgba(0,0,0,1)), color-stop(100%,rgba(44,44,44,1)), color-stop(100%,rgba(17,17,17,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 24%,rgba(0,0,0,1) 25%,rgba(19,20,73,1) 26%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 24%,rgba(0,0,0,1) 25%,rgba(19,20,73,1) 26%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 24%,rgba(0,0,0,1) 25%,rgba(19,20,73,1) 26%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 24%,rgba(0,0,0,1) 25%,rgba(19,20,73,1) 26%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+}
+
+#content {
+    background: rgb(76,76,76); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(76,76,76,1) 0%, rgba(89,89,89,1) 13%, rgba(0,0,0,1) 14%, rgba(19,20,73,1) 15%, rgba(31,30,79,1) 100%, rgba(17,17,17,1) 100%, rgba(0,0,0,1) 100%, rgba(44,44,44,1) 100%, rgba(17,17,17,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(13%,rgba(89,89,89,1)), color-stop(14%,rgba(0,0,0,1)), color-stop(15%,rgba(19,20,73,1)), color-stop(100%,rgba(31,30,79,1)), color-stop(100%,rgba(17,17,17,1)), color-stop(100%,rgba(0,0,0,1)), color-stop(100%,rgba(44,44,44,1)), color-stop(100%,rgba(17,17,17,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 13%,rgba(0,0,0,1) 14%,rgba(19,20,73,1) 15%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 13%,rgba(0,0,0,1) 14%,rgba(19,20,73,1) 15%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 13%,rgba(0,0,0,1) 14%,rgba(19,20,73,1) 15%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 13%,rgba(0,0,0,1) 14%,rgba(19,20,73,1) 15%,rgba(31,30,79,1) 100%,rgba(17,17,17,1) 100%,rgba(0,0,0,1) 100%,rgba(44,44,44,1) 100%,rgba(17,17,17,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
 }
 
 #content span {
@@ -97,11 +120,12 @@ article li > div {
 	min-height:40px;
 	height:auto;
 	overflow:hidden;
+    color: rgba(227,145,0,1);
 }
 
 #content span > img {
-	margin-top:5px;
-	margin-right:5px;
+	margin:5px;
+    border:2px solid rgba(227,145,0,.5);
 	float:right;
 	z-index:10;
 }
