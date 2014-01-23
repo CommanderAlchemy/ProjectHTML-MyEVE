@@ -91,7 +91,7 @@ function loadUserCharacters(){
 		});
 		var chars = JSON.stringify(characters);
 		localStorage.setItem('characters', chars);	
-		alert(chars);
+		console.log(chars);
 	}).fail(function(){
 		alert("Misslyckades att hämta konto-information.");
 	});	
