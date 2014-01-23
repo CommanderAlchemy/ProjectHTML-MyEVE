@@ -47,7 +47,7 @@ function loadCharacters(){
 		$(".characterItem").on("click", showCharacterInfo);
         getCharacterSheet(0);
 	}).fail(function(){
-		alert(loadCharSettings.failMsg);
+		console.log(loadCharSettings.failMsg);
 	});	
 }
 
