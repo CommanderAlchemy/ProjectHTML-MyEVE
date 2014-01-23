@@ -109,13 +109,17 @@ article li > div {
 #description {
 	height:30px;
 	display:inline-block;
+    color:white;
 }
 
 #characterDropdown{
-	width:70%;
 	float:left;
 }
 #saveForm{
-	width:15%;
 	float:left;
 }
+
+p {
+    color:white;
+}
+
