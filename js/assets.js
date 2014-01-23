@@ -70,7 +70,7 @@ function loadCharacterAssets(charId) {
 		
 		var str = JSON.stringify(items);
 		localStorage.items = str;
-		alert("Char got " + items.length + " items");
+		console.log("Char got " + items.length + " items");
         size = items.length;
         prices = [];
         temp = $.extend(true, [],items);
