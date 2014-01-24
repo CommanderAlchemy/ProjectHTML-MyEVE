@@ -5,6 +5,9 @@ var requests = 0,
     arrays = 0,
     loops = 0;
 
+
+var myplugin;
+
 start();
 
 /*
@@ -17,9 +20,28 @@ function start(){
 	loadCharacters();
 	
 	loadCharacterAssets($('#characterDropdown :selected').val());
+    progressbar();
 	$('#characterDropdown').on("change", function(e){
 		loadCharacterAssets($('#characterDropdown :selected').val());
+        progressbar();
 	});
+}
+
+
+function progressbar(){
+    myplugin = $('#p1').cprogress({
+           percent: 0, // starting position
+           img1: 'images/v1.png', // background
+           img2: 'images/v3.png', // foreground
+           speed: 10, // speed (timeout)
+           PIStep : 0.05, // every step foreground area is bigger about this val
+           limit: 100, // end value
+           loop : true, //if true, no matter if limit is set, progressbar will be running
+           showPercent : false, //show hide percent
+           onInit: function(){console.log('onInit');},
+           onComplete: function(p){console.log('onComplete',p);}
+     });
+    myplugin.start();
 }
 
 /*
@@ -128,10 +150,11 @@ function loadAssetValues(items) {
             var priceObject   = {   "typeID"    :   typeID,
                                     "price"      :   price };
 
+
             prices.push(priceObject);
 
         });
-
+        $("#value").html(Number((loops/arrays)*100).toFixed(1) + "%");
         console.log("Prices storage is " + prices.length);
         console.log("Contents " + JSON.stringify(prices));
         console.log("Requests completed: " + requests);
@@ -173,10 +196,13 @@ function loadAssetValues(items) {
 }
 
 function calcAssetsValue(items) {
+    myplugin.destroy();
+    $("#value").fadeToggle(100);
     console.log(temp.length + " went to calculate quantity");
 	var value = 0;
 	for (var i = 0; i < items.length; i++) {
 		value += (items[i].quantity * items[i].price);
 	}
 	$("#value").text(value.toFixed(2) + " ISK");
+    $("#value").fadeToggle(250);
 }
