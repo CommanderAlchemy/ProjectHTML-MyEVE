@@ -15,6 +15,7 @@ var showCharSettings = {previousToggle:null, milliSec:200,imgHeight:128,imgWidth
 
 // Array that get stored in local storage.
 var charactersObjects = [];
+var char = [];
 
 start();
 
@@ -24,6 +25,25 @@ start();
 function start(){
 	loadCharacters();
 }
+
+
+
+function progressbar(characterID){
+    char[characterID] = $("#"+characterID).cprogress({
+           percent: 0, // starting position
+           img1: 'images/v1.png', // background
+           img2: 'images/v3.png', // foreground
+           speed: 10, // speed (timeout)
+           PIStep : 0.05, // every step foreground area is bigger about this val
+           limit: 100, // end value
+           loop : true, //if true, no matter if limit is set, progressbar will be running
+           showPercent : false, //show hide percent
+           onInit: function(){console.log('onInit');},
+           onComplete: function(p){console.log('onComplete',p);}
+     });
+    char[characterID].start();
+}
+
  
 /*
  * The function using ajax to retrieve information about the characters on the account.
@@ -42,10 +62,13 @@ function loadCharacters(){
 				imageID = "http://image.eveonline.com/character/"+characterID+"_256.jpg";
 			
 			$("#content > ul").append("<li class='characterItem' data-rowId='"+characterID+"'>"+
-				"<span>"+characterName+"<img src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span></li>");
+				"<span>"+characterName+'<div id="'+characterID+'" class="jCProgress" style="opacity: 1;"></div>'+"<img id='IMG"+ characterID + "' src='"+imageID+"' alt='No Image' style='width:128px; height:128px;'/></span></li>");
+            $('#IMG'+characterID).fadeToggle(10);
+            progressbar(characterID);
 		});
 		$(".characterItem").on("click", showCharacterInfo);
         getCharacterSheet(0);
+
 	}).fail(function(){
 		console.log(loadCharSettings.failMsg);
 	});	
@@ -135,6 +158,9 @@ function getCharacterSheet(index){
 				lastKnownLocation   = $(this).find("lastKnownLocation").text();
                 securityStatus      = $(this).find("securityStatus").text();
 
+                char[characters[index].Id].destroy();
+
+
     });
 
     }).fail(function(){
@@ -180,16 +206,19 @@ function getCharacterSheet(index){
                                     "balance"           :   balance };
 
             // Push caracter object into the accountStatus array
+            $('#IMG'+characters[index].Id).fadeToggle(300);
             charactersObjects.push(charObject);
 
             // If there are more characters left itterate
             if (index < characters.length -1){
                 getCharacterSheet(++index);
+
             } else {
                 // When the itteration is done store the whole array in localstorage.
                 var accounts = JSON.stringify(charactersObjects);
                 localStorage.setItem("characterSheet", accounts);
                 loadCharacterSheet();
+
             }
     });
 
