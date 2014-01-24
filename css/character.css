@@ -69,5 +69,6 @@ article li > div {
     float:right;
     align-items:center;
     margin-top:10px;
+    margin-right:10px;
     z-index: 0;
 }
